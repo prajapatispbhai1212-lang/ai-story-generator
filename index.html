@@ -7,156 +7,132 @@
 <title>StoryAI - Groq AI Story Generator</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+font-family:Arial,sans-serif;
+background:#0c0b16;
+color:white;
+min-height:100vh;
+padding:20px;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #0c0b16;
-    color: white;
-    min-height: 100vh;
-    padding: 20px;
+.container{max-width:850px;margin:35px auto}
+
+header{text-align:center;margin-bottom:35px}
+
+.logo{font-size:45px;margin-bottom:10px}
+
+h1{
+font-size:36px;
+background:linear-gradient(90deg,#c084fc,#818cf8);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-.container {
-    max-width: 850px;
-    margin: 35px auto;
+header p{color:#aaa;margin-top:12px;line-height:1.7}
+
+.panel,.result{
+background:#191727;
+border:1px solid #343049;
+padding:25px;
+border-radius:16px;
+margin-bottom:20px;
 }
 
-header {
-    text-align: center;
-    margin-bottom: 35px;
+label{
+display:block;
+margin:17px 0 9px;
+font-weight:bold;
+color:#ddd;
 }
 
-.logo {
-    font-size: 45px;
-    margin-bottom: 10px;
+textarea,select,input{
+width:100%;
+padding:14px;
+border:1px solid #39364d;
+border-radius:9px;
+background:#100f1c;
+color:white;
+font-size:15px;
+outline:none;
 }
 
-h1 {
-    font-size: 36px;
-    background: linear-gradient(90deg,#c084fc,#818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+textarea{min-height:110px;resize:vertical}
+
+textarea:focus,select:focus,input:focus{
+border-color:#a78bfa;
 }
 
-header p {
-    color: #aaa;
-    margin-top: 12px;
-    line-height: 1.7;
+button{
+border:none;
+background:#8b5cf6;
+color:white;
+padding:14px 20px;
+border-radius:9px;
+cursor:pointer;
+font-weight:bold;
+transition:.2s;
 }
 
-.panel, .result {
-    background: #191727;
-    border: 1px solid #343049;
-    padding: 25px;
-    border-radius: 16px;
-    margin-bottom: 20px;
+button:hover{background:#7c3aed}
+button:disabled{opacity:.6;cursor:not-allowed}
+
+.generate{
+width:100%;
+margin-top:24px;
+font-size:16px;
 }
 
-label {
-    display: block;
-    margin: 17px 0 9px;
-    font-weight: bold;
-    color: #ddd;
+.status{
+text-align:center;
+color:#c4b5fd;
+margin-top:18px;
+line-height:1.6;
 }
 
-textarea, select {
-    width: 100%;
-    padding: 14px;
-    border: 1px solid #39364d;
-    border-radius: 9px;
-    background: #100f1c;
-    color: white;
-    font-size: 15px;
-    outline: none;
+.result{display:none}
+
+.result h2{
+color:#c4b5fd;
+margin-bottom:20px;
 }
 
-textarea {
-    min-height: 110px;
-    resize: vertical;
+#story{
+white-space:pre-wrap;
+line-height:1.9;
+color:#e5e1f0;
+font-size:16px;
+overflow-wrap:anywhere;
 }
 
-textarea:focus, select:focus {
-    border-color: #a78bfa;
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:25px;
 }
 
-button {
-    border: none;
-    background: #8b5cf6;
-    color: white;
-    padding: 14px 20px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: .2s;
+.actions button{flex:1;min-width:120px}
+
+.key-note{
+font-size:12px;
+color:#aaa;
+margin-top:8px;
+line-height:1.5;
 }
 
-button:hover {
-    background: #7c3aed;
+footer{
+text-align:center;
+color:#777;
+padding:20px;
+font-size:13px;
 }
 
-button:disabled {
-    opacity: .6;
-    cursor: not-allowed;
-}
-
-.generate {
-    width: 100%;
-    margin-top: 24px;
-    font-size: 16px;
-}
-
-.status {
-    text-align: center;
-    color: #c4b5fd;
-    margin-top: 18px;
-    line-height: 1.6;
-}
-
-.result {
-    display: none;
-}
-
-.result h2 {
-    color: #c4b5fd;
-    margin-bottom: 20px;
-}
-
-#story {
-    white-space: pre-wrap;
-    line-height: 1.9;
-    color: #e5e1f0;
-    font-size: 16px;
-    overflow-wrap: anywhere;
-}
-
-.actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 25px;
-}
-
-.actions button {
-    flex: 1;
-    min-width: 120px;
-}
-
-footer {
-    text-align: center;
-    color: #777;
-    padding: 20px;
-    font-size: 13px;
-}
-
-@media(max-width:600px) {
-    body { padding: 13px; }
-    h1 { font-size: 29px; }
-    .panel, .result { padding: 18px; }
+@media(max-width:600px){
+body{padding:13px}
+h1{font-size:29px}
+.panel,.result{padding:18px}
 }
 </style>
 </head>
@@ -166,81 +142,98 @@ footer {
 <div class="container">
 
 <header>
-    <div class="logo">✨</div>
-    <h1>StoryAI Generator</h1>
-    <p>
-        Your imagination. Our AI. Unlimited possibilities.<br>
-        Create amazing stories with Groq AI.
-    </p>
+<div class="logo">✨</div>
+<h1>StoryAI Generator</h1>
+<p>
+Your imagination. Our AI. Unlimited possibilities.<br>
+Create amazing stories with Groq AI.
+</p>
 </header>
 
 <section class="panel">
 
-    <label for="topic">💡 Story Idea</label>
+<label for="apiKey">🔑 Groq API Key</label>
 
-    <textarea
-        id="topic"
-        maxlength="1000"
-        placeholder="Example: A young boy discovers a magical kingdom..."
-    ></textarea>
+<input
+type="password"
+id="apiKey"
+placeholder="Paste your NEW Groq API Key here"
+autocomplete="off"
+>
 
-    <label for="genre">📚 Choose Genre</label>
+<p class="key-note">
+For local testing only. Never publish your API key in a public website.
+</p>
 
-    <select id="genre">
-        <option>Fantasy</option>
-        <option>Horror</option>
-        <option>Romance</option>
-        <option>Adventure</option>
-        <option>Science Fiction</option>
-        <option>Mystery</option>
-        <option>Comedy</option>
-        <option>Thriller</option>
-        <option>Moral Story</option>
-        <option>Children Story</option>
-    </select>
+<label for="topic">💡 Story Idea</label>
 
-    <label for="length">📖 Story Length</label>
+<textarea
+id="topic"
+maxlength="1000"
+placeholder="Example: A lion and a rabbit become friends..."
+></textarea>
 
-    <select id="length">
-        <option value="short">Short (300 words)</option>
-        <option value="medium" selected>Medium (700 words)</option>
-        <option value="long">Long (1200 words)</option>
-    </select>
+<label for="genre">📚 Choose Genre</label>
 
-    <button class="generate" id="generateBtn">
-        ✨ Generate My Story
-    </button>
+<select id="genre">
+<option>Fantasy</option>
+<option>Horror</option>
+<option>Romance</option>
+<option>Adventure</option>
+<option>Science Fiction</option>
+<option>Mystery</option>
+<option>Comedy</option>
+<option>Thriller</option>
+<option>Moral Story</option>
+<option>Children Story</option>
+</select>
 
-    <div class="status" id="status" role="status"></div>
+<label for="length">📖 Story Length</label>
+
+<select id="length">
+<option value="short">Short (300 words)</option>
+<option value="medium" selected>Medium (700 words)</option>
+<option value="long">Long (1200 words)</option>
+</select>
+
+<button class="generate" id="generateBtn">
+✨ Generate My Story
+</button>
+
+<div class="status" id="status" role="status"></div>
 
 </section>
 
 <section class="result" id="result">
 
-    <h2>📖 Your AI Generated Story</h2>
+<h2>📖 Your AI Generated Story</h2>
 
-    <div id="story"></div>
+<div id="story"></div>
 
-    <div class="actions">
-        <button id="copyBtn">📋 Copy Story</button>
-        <button id="downloadBtn">⬇ Download</button>
-        <button id="againBtn">🔄 Regenerate</button>
-    </div>
+<div class="actions">
+<button id="copyBtn">📋 Copy Story</button>
+<button id="downloadBtn">⬇ Download</button>
+<button id="againBtn">🔄 Regenerate</button>
+</div>
 
 </section>
 
 <footer>
-    Powered by Groq AI ⚡
+Powered by Groq AI ⚡
 </footer>
 
 </div>
 
 <script>
 
-// Groq backend API endpoint
-const API_URL = "/api/generate";
+const API_URL =
+"https://api.groq.com/openai/v1/chat/completions";
+
+// Current recommended Groq model
+const MODEL = "openai/gpt-oss-20b";
 
 const topicInput = document.getElementById("topic");
+const apiKeyInput = document.getElementById("apiKey");
 const genreInput = document.getElementById("genre");
 const lengthInput = document.getElementById("length");
 
@@ -253,120 +246,169 @@ const storyBox = document.getElementById("story");
 
 // GENERATE STORY
 
-async function generateStory() {
+async function generateStory(){
 
-    const topic = topicInput.value.trim();
+const apiKey = "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";
+const topic = topicInput.value.trim();
 
-    if (!topic) {
-        statusText.textContent =
-            "❌ Please enter your Story Idea!";
-        topicInput.focus();
-        return;
-    }
+if(!apiKey){
+statusText.textContent = "❌ Please enter your Groq API Key!";
+apiKeyInput.focus();
+return;
+}
 
-    generateBtn.disabled = true;
-    generateBtn.textContent = "⏳ Generating Story...";
+if(!apiKey.startsWith("gsk_")){
+statusText.textContent = "❌ Invalid Groq API Key format.";
+return;
+}
 
-    statusText.textContent =
-        "⚡ Groq AI is writing your story...";
+if(!topic){
+statusText.textContent = "❌ Please enter your Story Idea!";
+topicInput.focus();
+return;
+}
 
-    result.style.display = "none";
+generateBtn.disabled = true;
+generateBtn.textContent = "⏳ Generating Story...";
 
-    try {
+statusText.textContent = "⚡ Groq AI is writing your story...";
 
-        const response = await fetch(API_URL, {
-            method: "POST",
+result.style.display = "none";
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+const wordCount = {
+short:300,
+medium:700,
+long:1200
+}[lengthInput.value];
 
-            body: JSON.stringify({
-                topic: topic,
-                genre: genreInput.value,
-                length: lengthInput.value
-            })
-        });
+const prompt = `
+Write an original, interesting and engaging story.
 
-        const text = await response.text();
+Story idea: ${topic}
 
-        let data;
+Genre: ${genreInput.value}
 
-        try {
-            data = JSON.parse(text);
-        } catch {
-            throw new Error(
-                "Invalid API response. Check backend URL."
-            );
-        }
+Length: Approximately ${wordCount} words.
 
-        if (!response.ok) {
-            throw new Error(
-                data.error || "Story generation failed."
-            );
-        }
+Instructions:
+1. Give the story a creative title.
+2. Make the story interesting and easy to understand.
+3. Include meaningful characters and dialogues.
+4. Follow the selected genre.
+5. Write a satisfying ending.
+6. Use clear paragraphs.
+7. Do not explain how you created the story.
+`;
 
-        if (!data.story) {
-            throw new Error("No story received from AI.");
-        }
+try{
 
-        storyBox.textContent = data.story;
-        result.style.display = "block";
+const response = await fetch(API_URL,{
 
-        statusText.textContent =
-            "✅ Your story is ready!";
+method:"POST",
 
-        result.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+headers:{
+"Content-Type":"application/json",
+"Authorization":"Bearer "+apiKey
+},
 
-    } catch (error) {
+body:JSON.stringify({
 
-        console.error(error);
+model:MODEL,
 
-        statusText.textContent =
-            "❌ " + error.message;
+messages:[
+{
+role:"system",
+content:"You are a professional creative story writer. Write original, engaging and well-structured stories."
+},
+{
+role:"user",
+content:prompt
+}
+],
 
-    } finally {
+temperature:0.8,
+max_completion_tokens:4096
 
-        generateBtn.disabled = false;
+})
 
-        generateBtn.textContent =
-            "✨ Generate My Story";
+});
 
-    }
+const data = await response.json();
+
+if(!response.ok){
+
+throw new Error(
+data.error?.message || "Groq API request failed."
+);
+
+}
+
+const story =
+data.choices?.[0]?.message?.content;
+
+if(!story){
+throw new Error("No story received from Groq AI.");
+}
+
+storyBox.textContent = story;
+
+result.style.display = "block";
+
+statusText.textContent =
+"✅ Your story generated successfully!";
+
+result.scrollIntoView({
+behavior:"smooth",
+block:"start"
+});
+
+}catch(error){
+
+console.error(error);
+
+statusText.textContent =
+"❌ "+error.message;
+
+}finally{
+
+generateBtn.disabled = false;
+
+generateBtn.textContent =
+"✨ Generate My Story";
+
+}
+
 }
 
 
 // BUTTON EVENTS
 
-generateBtn.addEventListener("click", generateStory);
+generateBtn.addEventListener("click",generateStory);
 
 document.getElementById("againBtn")
-.addEventListener("click", generateStory);
+.addEventListener("click",generateStory);
 
 
 // COPY STORY
 
 document.getElementById("copyBtn")
-.addEventListener("click", async function() {
+.addEventListener("click",async()=>{
 
-    try {
+try{
 
-        await navigator.clipboard.writeText(
-            storyBox.textContent
-        );
+await navigator.clipboard.writeText(
+storyBox.textContent
+);
 
-        statusText.textContent =
-            "✅ Story copied successfully!";
+statusText.textContent =
+"✅ Story copied successfully!";
 
-    } catch {
+}catch{
 
-        statusText.textContent =
-            "❌ Unable to copy story.";
+statusText.textContent =
+"❌ Unable to copy story.";
 
-    }
+}
 
 });
 
@@ -374,28 +416,28 @@ document.getElementById("copyBtn")
 // DOWNLOAD STORY
 
 document.getElementById("downloadBtn")
-.addEventListener("click", function() {
+.addEventListener("click",()=>{
 
-    const blob = new Blob(
-        [storyBox.textContent],
-        {type: "text/plain;charset=utf-8"}
-    );
+const blob = new Blob(
+[storyBox.textContent],
+{type:"text/plain;charset=utf-8"}
+);
 
-    const url = URL.createObjectURL(blob);
+const url = URL.createObjectURL(blob);
 
-    const link = document.createElement("a");
+const link = document.createElement("a");
 
-    link.href = url;
-    link.download = "StoryAI-Story.txt";
+link.href = url;
+link.download = "StoryAI-My-Story.txt";
 
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+document.body.appendChild(link);
+link.click();
+link.remove();
 
-    URL.revokeObjectURL(url);
+URL.revokeObjectURL(url);
 
-    statusText.textContent =
-        "✅ Story downloaded successfully!";
+statusText.textContent =
+"✅ Story downloaded successfully!";
 
 });
 
