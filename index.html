@@ -8,154 +8,155 @@
 
 <style>
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #0c0b16;
-  color: #fff;
-  min-height: 100vh;
-  padding: 25px;
+    font-family: Arial, sans-serif;
+    background: #0c0b16;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .container {
-  max-width: 850px;
-  margin: 35px auto;
+    max-width: 850px;
+    margin: 35px auto;
 }
 
 header {
-  text-align: center;
-  margin-bottom: 35px;
+    text-align: center;
+    margin-bottom: 35px;
 }
 
 .logo {
-  font-size: 42px;
-  margin-bottom: 12px;
+    font-size: 42px;
+    margin-bottom: 10px;
 }
 
 h1 {
-  font-size: 36px;
-  background: linear-gradient(90deg,#c084fc,#818cf8);
-  -webkit-background-clip: text;
-  color: transparent;
+    font-size: 36px;
+    background: linear-gradient(90deg,#c084fc,#818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 header p {
-  color: #aaa;
-  margin-top: 12px;
-  line-height: 1.6;
+    color: #aaa;
+    margin-top: 12px;
+    line-height: 1.7;
 }
 
 .panel, .result {
-  background: #191727;
-  border: 1px solid #343049;
-  padding: 25px;
-  border-radius: 16px;
-  margin-bottom: 20px;
+    background: #191727;
+    border: 1px solid #343049;
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 20px;
 }
 
 label {
-  display: block;
-  margin: 17px 0 9px;
-  font-weight: bold;
-  color: #ddd;
+    display: block;
+    margin: 17px 0 9px;
+    font-weight: bold;
+    color: #ddd;
 }
 
-input, textarea, select {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #39364d;
-  border-radius: 9px;
-  background: #100f1c;
-  color: white;
-  font-size: 15px;
-  outline: none;
-}
-
-input:focus, textarea:focus, select:focus {
-  border-color: #a78bfa;
+textarea, select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #39364d;
+    border-radius: 9px;
+    background: #100f1c;
+    color: white;
+    font-size: 15px;
+    outline: none;
 }
 
 textarea {
-  min-height: 110px;
-  resize: vertical;
+    min-height: 110px;
+    resize: vertical;
+}
+
+textarea:focus, select:focus {
+    border-color: #a78bfa;
 }
 
 button {
-  border: none;
-  background: #8b5cf6;
-  color: white;
-  padding: 14px 20px;
-  border-radius: 9px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: .2s;
+    border: none;
+    background: #8b5cf6;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .2s;
 }
 
 button:hover {
-  background: #7c3aed;
+    background: #7c3aed;
 }
 
 button:disabled {
-  opacity: .6;
-  cursor: not-allowed;
+    opacity: .6;
+    cursor: not-allowed;
 }
 
 .generate {
-  width: 100%;
-  margin-top: 24px;
-  font-size: 16px;
+    width: 100%;
+    margin-top: 24px;
+    font-size: 16px;
 }
 
 .status {
-  text-align: center;
-  color: #c4b5fd;
-  margin-top: 15px;
-  line-height: 1.5;
+    text-align: center;
+    color: #c4b5fd;
+    margin-top: 18px;
+    line-height: 1.6;
 }
 
 .result {
-  display: none;
+    display: none;
 }
 
 .result h2 {
-  color: #c4b5fd;
-  margin-bottom: 20px;
+    color: #c4b5fd;
+    margin-bottom: 20px;
 }
 
 #story {
-  white-space: pre-wrap;
-  line-height: 1.9;
-  color: #e5e1f0;
-  font-size: 16px;
+    white-space: pre-wrap;
+    line-height: 1.9;
+    color: #e5e1f0;
+    font-size: 16px;
+    overflow-wrap: anywhere;
 }
 
 .actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 25px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 25px;
 }
 
 .actions button {
-  flex: 1;
-  min-width: 120px;
+    flex: 1;
+    min-width: 120px;
 }
 
 footer {
-  text-align: center;
-  color: #777;
-  padding: 20px;
-  font-size: 13px;
+    text-align: center;
+    color: #777;
+    padding: 20px;
+    font-size: 13px;
 }
 
-@media(max-width: 600px) {
-  body { padding: 13px; }
-  h1 { font-size: 29px; }
-  .panel, .result { padding: 18px; }
+@media(max-width:600px) {
+    body { padding: 13px; }
+    h1 { font-size: 29px; }
+    .panel, .result { padding: 18px; }
 }
 </style>
 </head>
@@ -165,174 +166,256 @@ footer {
 <div class="container">
 
 <header>
-  <div class="logo">✨</div>
-  <h1>StoryAI Generator</h1>
-  <p>
-    Your imagination. Our AI. Unlimited possibilities.<br>
-    Create amazing stories with Gemini AI.
-  </p>
+    <div class="logo">✨</div>
+    <h1>StoryAI Generator</h1>
+    <p>
+        Your imagination. Our AI. Unlimited possibilities.<br>
+        Create amazing stories with Gemini AI.
+    </p>
 </header>
 
 <section class="panel">
 
-  <label for="topic">💡 Story Idea</label>
+    <label for="topic">💡 Story Idea</label>
 
-  <textarea
-    id="topic"
-    maxlength="1000"
-    placeholder="Example: A young boy discovers a secret magical kingdom..."
-  ></textarea>
+    <textarea
+        id="topic"
+        maxlength="1000"
+        placeholder="Example: A lion and a rabbit become friends..."
+    ></textarea>
 
-  <label for="genre">📚 Choose Genre</label>
+    <label for="genre">📚 Choose Genre</label>
 
-  <select id="genre">
-    <option>Fantasy</option>
-    <option>Horror</option>
-    <option>Romance</option>
-    <option>Adventure</option>
-    <option>Science Fiction</option>
-    <option>Mystery</option>
-    <option>Comedy</option>
-    <option>Thriller</option>
-  </select>
+    <select id="genre">
+        <option>Fantasy</option>
+        <option>Horror</option>
+        <option>Romance</option>
+        <option>Adventure</option>
+        <option>Science Fiction</option>
+        <option>Mystery</option>
+        <option>Comedy</option>
+        <option>Thriller</option>
+    </select>
 
-  <label for="length">📖 Story Length</label>
+    <label for="length">📖 Story Length</label>
 
-  <select id="length">
-    <option value="short">Short (300 words)</option>
-    <option value="medium" selected>Medium (700 words)</option>
-    <option value="long">Long (1200 words)</option>
-  </select>
+    <select id="length">
+        <option value="short">Short (300 words)</option>
+        <option value="medium" selected>Medium (700 words)</option>
+        <option value="long">Long (1200 words)</option>
+    </select>
 
-  <button class="generate" id="generateBtn">
-    ✨ Generate My Story
-  </button>
+    <button class="generate" id="generateBtn">
+        ✨ Generate My Story
+    </button>
 
-  <div class="status" id="status" role="status"></div>
+    <div class="status" id="status" role="status"></div>
 
 </section>
 
 <section class="result" id="result">
 
-  <h2>📖 Your AI Generated Story</h2>
+    <h2>📖 Your AI Generated Story</h2>
 
-  <div id="story"></div>
+    <div id="story"></div>
 
-  <div class="actions">
-    <button id="copyBtn">📋 Copy</button>
-    <button id="downloadBtn">⬇ Download</button>
-    <button id="againBtn">🔄 Regenerate</button>
-  </div>
+    <div class="actions">
+        <button id="copyBtn">📋 Copy</button>
+        <button id="downloadBtn">⬇ Download</button>
+        <button id="againBtn">🔄 Regenerate</button>
+    </div>
 
 </section>
 
 <footer>
-  Powered by Google Gemini AI ✨
+    Powered by Google Gemini AI ✨
 </footer>
 
 </div>
 
 <script>
+
+// ======================================
+// BACKEND API URL
+// ======================================
+
+// Local Flask backend:
+const API_URL = "http://127.0.0.1:5000/api/generate";
+
+// IMPORTANT:
+// After deploying your backend, replace this URL
+// with your actual HTTPS backend URL.
+
 const topicInput = document.getElementById("topic");
 const genreInput = document.getElementById("genre");
 const lengthInput = document.getElementById("length");
 
 const generateBtn = document.getElementById("generateBtn");
 const statusText = document.getElementById("status");
+
 const result = document.getElementById("result");
 const storyBox = document.getElementById("story");
 
+
+// ======================================
+// GENERATE STORY
+// ======================================
+
 async function generateStory() {
-  const topic = topicInput.value.trim();
 
-  if (!topic) {
-    statusText.textContent = "Please enter a story idea first!";
-    topicInput.focus();
-    return;
-  }
+    const topic = topicInput.value.trim();
 
-  generateBtn.disabled = true;
-  generateBtn.textContent = "⏳ Creating your story...";
-  statusText.textContent = "Gemini is writing your story...";
-  result.style.display = "none";
-
-  try {
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        topic,
-        genre: genreInput.value,
-        length: lengthInput.value
-      })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Generation failed.");
+    if (!topic) {
+        statusText.textContent =
+            "❌ Please enter a story idea first!";
+        topicInput.focus();
+        return;
     }
 
-    if (!data.story) {
-      throw new Error("No story was returned.");
+    generateBtn.disabled = true;
+    generateBtn.textContent = "⏳ Creating your story...";
+
+    statusText.textContent =
+        "✨ AI is writing your story. Please wait...";
+
+    result.style.display = "none";
+
+    try {
+
+        const response = await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                topic: topic,
+                genre: genreInput.value,
+                length: lengthInput.value
+
+            })
+
+        });
+
+        const responseText = await response.text();
+
+        let data;
+
+        try {
+            data = JSON.parse(responseText);
+        } catch {
+            throw new Error(
+                "Invalid backend response. Check your Flask server and API URL."
+            );
+        }
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Story generation failed."
+            );
+        }
+
+        if (!data.story) {
+            throw new Error("No story received from AI.");
+        }
+
+        storyBox.textContent = data.story;
+        result.style.display = "block";
+
+        statusText.textContent =
+            "✅ Your story is ready!";
+
+        result.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        statusText.textContent = "❌ " + error.message;
+
+    } finally {
+
+        generateBtn.disabled = false;
+
+        generateBtn.textContent =
+            "✨ Generate My Story";
+
     }
-
-    storyBox.textContent = data.story;
-    result.style.display = "block";
-    statusText.textContent = "✅ Your story is ready!";
-
-    result.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-
-  } catch (error) {
-    statusText.textContent = "❌ " + error.message;
-  } finally {
-    generateBtn.disabled = false;
-    generateBtn.textContent = "✨ Generate My Story";
-  }
 }
+
+
+// ======================================
+// BUTTON EVENTS
+// ======================================
 
 generateBtn.addEventListener("click", generateStory);
 
-document.getElementById("againBtn").addEventListener(
-  "click",
-  generateStory
-);
+document.getElementById("againBtn")
+.addEventListener("click", generateStory);
 
-document.getElementById("copyBtn").addEventListener(
-  "click",
-  async () => {
+
+// ======================================
+// COPY STORY
+// ======================================
+
+document.getElementById("copyBtn")
+.addEventListener("click", async function() {
+
     try {
-      await navigator.clipboard.writeText(storyBox.textContent);
-      statusText.textContent = "✅ Story copied!";
-    } catch {
-      statusText.textContent = "Unable to copy. Please select the text.";
-    }
-  }
-);
 
-document.getElementById("downloadBtn").addEventListener(
-  "click",
-  () => {
+        await navigator.clipboard.writeText(
+            storyBox.textContent
+        );
+
+        statusText.textContent =
+            "✅ Story copied successfully!";
+
+    } catch {
+
+        statusText.textContent =
+            "❌ Unable to copy story.";
+
+    }
+
+});
+
+
+// ======================================
+// DOWNLOAD STORY
+// ======================================
+
+document.getElementById("downloadBtn")
+.addEventListener("click", function() {
+
     const blob = new Blob(
-      [storyBox.textContent],
-      { type: "text/plain;charset=utf-8" }
+        [storyBox.textContent],
+        { type: "text/plain;charset=utf-8" }
     );
 
     const url = URL.createObjectURL(blob);
+
     const link = document.createElement("a");
 
     link.href = url;
     link.download = "my-ai-story.txt";
+
+    document.body.appendChild(link);
     link.click();
+    link.remove();
 
     URL.revokeObjectURL(url);
-  }
-);
+
+    statusText.textContent =
+        "✅ Story downloaded!";
+
+});
+
 </script>
 
 </body>
