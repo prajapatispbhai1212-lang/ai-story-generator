@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StoryAI - AI Story Generator</title>
+<title>StoryAI - Groq AI Story Generator</title>
 
 <style>
 * {
@@ -32,7 +32,7 @@ header {
 }
 
 .logo {
-    font-size: 42px;
+    font-size: 45px;
     margin-bottom: 10px;
 }
 
@@ -170,7 +170,7 @@ footer {
     <h1>StoryAI Generator</h1>
     <p>
         Your imagination. Our AI. Unlimited possibilities.<br>
-        Create amazing stories with Gemini AI.
+        Create amazing stories with Groq AI.
     </p>
 </header>
 
@@ -181,7 +181,7 @@ footer {
     <textarea
         id="topic"
         maxlength="1000"
-        placeholder="Example: A lion and a rabbit become friends..."
+        placeholder="Example: A young boy discovers a magical kingdom..."
     ></textarea>
 
     <label for="genre">📚 Choose Genre</label>
@@ -195,6 +195,8 @@ footer {
         <option>Mystery</option>
         <option>Comedy</option>
         <option>Thriller</option>
+        <option>Moral Story</option>
+        <option>Children Story</option>
     </select>
 
     <label for="length">📖 Story Length</label>
@@ -220,7 +222,7 @@ footer {
     <div id="story"></div>
 
     <div class="actions">
-        <button id="copyBtn">📋 Copy</button>
+        <button id="copyBtn">📋 Copy Story</button>
         <button id="downloadBtn">⬇ Download</button>
         <button id="againBtn">🔄 Regenerate</button>
     </div>
@@ -228,23 +230,15 @@ footer {
 </section>
 
 <footer>
-    Powered by Google Gemini AI ✨
+    Powered by Groq AI ⚡
 </footer>
 
 </div>
 
 <script>
 
-// ======================================
-// BACKEND API URL
-// ======================================
-
-// Local Flask backend:
-const API_URL = "http://127.0.0.1:5000/api/generate";
-
-// IMPORTANT:
-// After deploying your backend, replace this URL
-// with your actual HTTPS backend URL.
+// Groq backend API endpoint
+const API_URL = "/api/generate";
 
 const topicInput = document.getElementById("topic");
 const genreInput = document.getElementById("genre");
@@ -257,9 +251,7 @@ const result = document.getElementById("result");
 const storyBox = document.getElementById("story");
 
 
-// ======================================
 // GENERATE STORY
-// ======================================
 
 async function generateStory() {
 
@@ -267,23 +259,22 @@ async function generateStory() {
 
     if (!topic) {
         statusText.textContent =
-            "❌ Please enter a story idea first!";
+            "❌ Please enter your Story Idea!";
         topicInput.focus();
         return;
     }
 
     generateBtn.disabled = true;
-    generateBtn.textContent = "⏳ Creating your story...";
+    generateBtn.textContent = "⏳ Generating Story...";
 
     statusText.textContent =
-        "✨ AI is writing your story. Please wait...";
+        "⚡ Groq AI is writing your story...";
 
     result.style.display = "none";
 
     try {
 
         const response = await fetch(API_URL, {
-
             method: "POST",
 
             headers: {
@@ -291,24 +282,21 @@ async function generateStory() {
             },
 
             body: JSON.stringify({
-
                 topic: topic,
                 genre: genreInput.value,
                 length: lengthInput.value
-
             })
-
         });
 
-        const responseText = await response.text();
+        const text = await response.text();
 
         let data;
 
         try {
-            data = JSON.parse(responseText);
+            data = JSON.parse(text);
         } catch {
             throw new Error(
-                "Invalid backend response. Check your Flask server and API URL."
+                "Invalid API response. Check backend URL."
             );
         }
 
@@ -337,7 +325,8 @@ async function generateStory() {
 
         console.error(error);
 
-        statusText.textContent = "❌ " + error.message;
+        statusText.textContent =
+            "❌ " + error.message;
 
     } finally {
 
@@ -350,9 +339,7 @@ async function generateStory() {
 }
 
 
-// ======================================
 // BUTTON EVENTS
-// ======================================
 
 generateBtn.addEventListener("click", generateStory);
 
@@ -360,9 +347,7 @@ document.getElementById("againBtn")
 .addEventListener("click", generateStory);
 
 
-// ======================================
 // COPY STORY
-// ======================================
 
 document.getElementById("copyBtn")
 .addEventListener("click", async function() {
@@ -386,16 +371,14 @@ document.getElementById("copyBtn")
 });
 
 
-// ======================================
 // DOWNLOAD STORY
-// ======================================
 
 document.getElementById("downloadBtn")
 .addEventListener("click", function() {
 
     const blob = new Blob(
         [storyBox.textContent],
-        { type: "text/plain;charset=utf-8" }
+        {type: "text/plain;charset=utf-8"}
     );
 
     const url = URL.createObjectURL(blob);
@@ -403,7 +386,7 @@ document.getElementById("downloadBtn")
     const link = document.createElement("a");
 
     link.href = url;
-    link.download = "my-ai-story.txt";
+    link.download = "StoryAI-Story.txt";
 
     document.body.appendChild(link);
     link.click();
@@ -412,7 +395,7 @@ document.getElementById("downloadBtn")
     URL.revokeObjectURL(url);
 
     statusText.textContent =
-        "✅ Story downloaded!";
+        "✅ Story downloaded successfully!";
 
 });
 
